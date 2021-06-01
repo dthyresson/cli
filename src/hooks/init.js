@@ -1,7 +1,5 @@
 const process = require('process')
 
-const envinfo = require('envinfo')
-
 const getGlobalConfig = require('../utils/get-global-config')
 const header = require('../utils/header')
 const { track } = require('../utils/telemetry')
@@ -31,6 +29,9 @@ module.exports = async function initHooks(context) {
     console.log(`────────────────────┐
  Environment Info   │
 ────────────────────┘`)
+
+    // eslint-disable-next-line node/global-require
+    const envinfo = require('envinfo')
     const data = await envinfo.run({
       System: ['OS', 'CPU'],
       Binaries: ['Node', 'Yarn', 'npm'],

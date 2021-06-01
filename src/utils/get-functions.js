@@ -1,5 +1,3 @@
-const { listFunctions } = require('@netlify/zip-it-and-ship-it')
-
 const { fileExistsAsync } = require('../lib/fs')
 
 const getUrlPath = (functionName) => `/.netlify/functions/${functionName}`
@@ -19,6 +17,8 @@ const getFunctions = async (functionsSrcDir) => {
     return []
   }
 
+  // eslint-disable-next-line node/global-require
+  const { listFunctions } = require('@netlify/zip-it-and-ship-it')
   const functions = await listFunctions(functionsSrcDir)
   const functionsWithProps = functions.filter(({ runtime }) => runtime === JS).map((func) => addFunctionProps(func))
   return functionsWithProps
@@ -29,6 +29,8 @@ const getFunctionsAndWatchDirs = async (functionsSrcDir) => {
     return { functions: [], watchDirs: [functionsSrcDir] }
   }
 
+  // eslint-disable-next-line node/global-require
+  const { listFunctions } = require('@netlify/zip-it-and-ship-it')
   // get all functions files so we know which directories to watch
   const functions = await listFunctions(functionsSrcDir)
   const watchDirs = [functionsSrcDir]

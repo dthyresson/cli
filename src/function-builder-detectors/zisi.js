@@ -1,6 +1,5 @@
 const path = require('path')
 
-const { zipFunction, zipFunctions } = require('@netlify/zip-it-and-ship-it')
 const del = require('del')
 const makeDir = require('make-dir')
 const pFilter = require('p-filter')
@@ -71,6 +70,8 @@ const zipFunctionsAndUpdateTree = async ({
   zipCache,
   zipOptions,
 }) => {
+  // eslint-disable-next-line node/global-require
+  const { zipFunction, zipFunctions } = require('@netlify/zip-it-and-ship-it')
   if (functions !== undefined) {
     await pFilter(
       functions,

@@ -5,7 +5,6 @@ const url = require('url')
 const chokidar = require('chokidar')
 const cookie = require('cookie')
 const { parseRedirectsFormat, parseNetlifyConfig } = require('netlify-redirect-parser')
-const redirector = require('netlify-redirector')
 
 const { fileExistsAsync } = require('../lib/fs')
 
@@ -75,6 +74,8 @@ const createRewriter = async function ({ distDir, projectDir, jwtSecret, jwtRole
     if (matcher) return matcher
 
     if (rules.length !== 0) {
+      // eslint-disable-next-line node/global-require
+      const redirector = require('netlify-redirector')
       return (matcher = await redirector.parseJSON(JSON.stringify(rules), {
         jwtSecret,
         jwtRoleClaim,

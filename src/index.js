@@ -1,9 +1,13 @@
+const process = require('process')
+
 const updateNotifier = require('update-notifier')
 
 const pkg = require('../package.json')
 
 // 12 hours
 const UPDATE_CHECK_INTERVAL = 432e5
+
+process.env.OCLIF_TS_NODE = '0'
 
 try {
   updateNotifier({
